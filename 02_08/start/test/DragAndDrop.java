@@ -5,7 +5,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.interactions.Actions;
 
 public class DragAndDrop {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
 
         System.setProperty("webdriver.chrome.driver","/opt/homebrew/bin/chromedriver");
 
@@ -23,6 +23,7 @@ public class DragAndDrop {
 //        use new actions object to call dragndrop - takes two arguments (image and box),
 //        then build, then perform to execute action
         actions.dragAndDrop(image,box).build().perform();
+        Thread.sleep(1000);
         driver.quit();
 
     }
