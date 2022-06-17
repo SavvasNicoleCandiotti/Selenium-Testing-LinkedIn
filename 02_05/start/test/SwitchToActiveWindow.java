@@ -21,7 +21,7 @@ public class SwitchToActiveWindow {
         for(String handle1: driver.getWindowHandles()){
             driver.switchTo().window(handle1);
         }
-//        switches back to original window 
+//        switches back to original window
         driver.switchTo().window(originalHandle);
         driver.quit();
     }
