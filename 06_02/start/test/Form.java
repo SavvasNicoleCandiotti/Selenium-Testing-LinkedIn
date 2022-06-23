@@ -10,12 +10,25 @@ import static org.junit.Assert.assertEquals;
 public class Form {
     public static void main(String[] args) {
 
-        System.setProperty("webdriver.chrome.driver", "/Users/meaghanlewis/Downloads/chromedriver");
+        System.setProperty("webdriver.chrome.driver",  "/opt/homebrew/bin/chromedriver");
 
         WebDriver driver = new ChromeDriver();
 
         driver.get("https://formy-project.herokuapp.com/form");
 
+        submitForm(driver);
+
+        WaitForAlertBanner(driver);
+
+////        Assertion - comparing string of text on page to the alert element's text on the browser - arguments are expected text string and the web element text
+//        String alertText = alert.getText();
+//        assertEquals("The form was successfully submitted!", alertText);
+//        replace assertion with refactor method below
+        getAlertBannerText(driver);
+        driver.quit();
+    }
+
+    public static void submitForm(WebDriver driver) {
         driver.findElement(By.id("first-name")).sendKeys("John");
 
         driver.findElement(By.id("last-name")).sendKeys("Doe");
@@ -32,7 +45,14 @@ public class Form {
         driver.findElement(By.id("datepicker")).sendKeys(Keys.RETURN);
 
         driver.findElement(By.cssSelector(".btn.btn-lg.btn-primary")).click();
+    }
 
-        driver.quit();
+    public static void WaitForAlertBanner(WebDriver driver){
+        WebDriverWait wait = new WebDriverWait(driver, 10);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("alert")));
+    }
+
+    public static String getAlertBannerText(WebDriver driver){
+               return driver.findElement(By.className("alert")).getText();
     }
 }
